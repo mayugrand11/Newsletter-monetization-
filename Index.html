@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter Monetization Masterplan</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --card: #111; --card-hover: #161616;
+      --border: #1a1a1a; --border-light: #222;
+      --text: #fff; --text2: #a0a0a0; --text3: #555;
+      --red: #dc2626; --red-light: #ef4444;
+      --gold: #d4a843;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .text-center { text-align: center; }
+    .red { color: var(--red); } .gold { color: var(--gold); }
+    .text2 { color: var(--text2); } .text3 { color: var(--text3); }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(0,0,0,0.95); border-bottom: 1px solid var(--border); padding: 12px 0; }
+    .nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1rem; cursor: pointer; }
+    .nav-links { display: flex; align-items: center; gap: 16px; }
+    .nav-link { color: var(--text2); font-size: 0.85rem; cursor: pointer; text-decoration: none; }
+    .nav-link:hover { color: var(--text); }
+    .btn-nav { background: var(--red); color: #fff; padding: 7px 16px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; border: none; cursor: pointer; }
+    .btn-nav:hover { background: var(--red-light); }
+
+    /* HERO */
+    .hero { padding: 120px 0 60px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.25); padding: 5px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; color: var(--red-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .hero h1 span { color: var(--red); }
+    .hero p { font-size: 1.1rem; color: var(--text2); max-width: 580px; margin: 0 auto 32px; }
+    .hero p strong { color: var(--text); }
+    .hero-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .btn-primary { background: var(--red); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 800; font-size: 1rem; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: var(--red-light); }
+    .btn-secondary { background: transparent; color: var(--text2); padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; border: 1px solid var(--border-light); cursor: pointer; text-decoration: none; }
+    .btn-secondary:hover { color: var(--text); border-color: var(--text3); background: var(--card); }
+    .hero-proof { margin-top: 24px; font-size: 0.8rem; color: var(--text3); }
+    .hero-proof .stars { color: var(--gold); }
+
+    /* SECTIONS */
+    .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .section:last-of-type { border-bottom: none; }
+    .label { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--red); margin-bottom: 12px; }
+    .section h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 12px; }
+    .section-sub { color: var(--text2); font-size: 0.95rem; max-width: 540px; margin: 0 auto; line-height: 1.6; }
+
+    /* PAIN GRID */
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .pain-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
+    .pain-card:hover { border-color: rgba(220,38,38,0.3); background: var(--card-hover); }
+    .pain-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .pain-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .pain-card p { font-size: 0.83rem; color: var(--text2); line-height: 1.5; }
+    .pain-full { grid-column: 1 / -1; }
+
+    /* REALITY BOX */
+    .reality-box { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 10px; padding: 28px; margin-top: 28px; }
+    .reality-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 14px; color: var(--red-light); }
+    .reality-box p { color: var(--text2); font-size: 0.88rem; margin-bottom: 10px; line-height: 1.6; }
+    .reality-box strong { color: var(--text); }
+
+    /* PRODUCT LIST */
+    .product-list { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+    .product-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; }
+    .product-item:hover { border-color: rgba(220,38,38,0.25); background: var(--card-hover); }
+    .p-num { flex-shrink: 0; width: 30px; height: 30px; background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; color: var(--red-light); }
+    .product-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .product-item p { font-size: 0.83rem; color: var(--text2); line-height: 1.5; }
+
+    /* BONUS GRID */
+    .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+    .bonus-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; position: relative; }
+    .bonus-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--red)); }
+    .bonus-card:hover { border-color: rgba(212,168,67,0.25); }
+    .bonus-tag { display: inline-block; background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.2); color: var(--gold); font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+    .bonus-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .bonus-card p { font-size: 0.82rem; color: var(--text2); line-height: 1.5; margin-bottom: 10px; }
+    .bonus-value { font-size: 0.75rem; color: var(--text3); font-weight: 600; }
+    .bonus-value .strike { text-decoration: line-through; color: var(--red); margin-right: 4px; }
+    .bonus-value .free { color: var(--gold); font-weight: 700; }
+
+    /* MATH BOX */
+    .math-box { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin-top: 32px; position: relative; }
+    .math-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--red); }
+    .math-scenario { color: var(--text2); font-size: 0.88rem; margin-bottom: 20px; }
+    .math-scenario strong { color: var(--text); }
+    .math-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .math-row:last-of-type { border-bottom: none; }
+    .math-row .label { color: var(--text2); }
+    .math-row .value { font-weight: 700; }
+    .math-row .value.accent { color: var(--red-light); font-size: 1rem; }
+    .math-row .check { color: var(--red); margin-right: 4px; }
+    .math-total { display: flex; justify-content: space-between; margin-top: 18px; padding-top: 18px; border-top: 2px solid var(--red); }
+    .math-total .label { font-weight: 700; }
+    .math-total .value { font-size: 1.6rem; font-weight: 900; color: var(--red); }
+    .math-note { margin-top: 18px; padding: 14px; background: rgba(220,38,38,0.08); border-radius: 8px; font-size: 0.85rem; color: var(--red-light); font-weight: 600; text-align: center; border: 1px solid rgba(220,38,38,0.1); }
+
+    /* OBJECTIONS */
+    .objection-list { margin-top: 32px; display: flex; flex-direction: column; gap: 8px; }
+    .objection { background: var(--card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .objection-q { padding: 16px 20px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .objection-q:hover { background: var(--card-hover); }
+    .objection-q .arrow { color: var(--text3); transition: transform 0.2s; }
+    .objection.open .objection-q .arrow { transform: rotate(180deg); color: var(--red); }
+    .objection-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 20px; color: var(--text2); font-size: 0.85rem; line-height: 1.6; }
+    .objection.open .objection-a { max-height: 300px; padding: 0 20px 16px; }
+
+    /* CTA BANNER */
+    .cta-banner { padding: 60px 0; text-align: center; }
+    .cta-banner h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 12px; }
+    .cta-banner p { color: var(--text2); font-size: 1rem; margin-bottom: 28px; }
+    .cta-sub { margin-top: 14px; font-size: 0.78rem; color: var(--text3); }
+
+    /* PRICING PAGE */
+    .page-pricing { min-height: 100vh; padding: 100px 0 60px; display: flex; flex-direction: column; align-items: center; }
+    .pricing-card { background: var(--card); border: 2px solid var(--red); border-radius: 16px; padding: 40px 36px; max-width: 500px; width: 100%; text-align: center; position: relative; }
+    .pricing-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+    .pricing-popular { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--red); color: #fff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; padding: 5px 24px; border-radius: 0 0 8px 8px; }
+    .pricing-name { font-size: 1.3rem; font-weight: 800; margin: 20px 0 4px; }
+    .pricing-desc { color: var(--text2); font-size: 0.85rem; margin-bottom: 24px; }
+    .pricing-original { font-size: 1rem; color: var(--text3); text-decoration: line-through; margin-right: 8px; }
+    .pricing-current { font-size: 3.5rem; font-weight: 900; color: var(--red); line-height: 1; }
+    .pricing-period { color: var(--text3); font-size: 0.8rem; margin-bottom: 28px; }
+    .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+    .pricing-features li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; }
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features .check { flex-shrink: 0; width: 18px; height: 18px; background: rgba(220,38,38,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--red-light); font-size: 0.6rem; margin-top: 2px; }
+    .pricing-features .bonus-check { background: rgba(212,168,67,0.1); color: var(--gold); }
+    .btn-buy { display: block; width: 100%; background: var(--red); color: #fff; padding: 16px; border-radius: 10px; font-weight: 800; font-size: 1.05rem; border: none; cursor: pointer; }
+    .btn-buy:hover { background: var(--red-light); }
+    .btn-buy.loading { pointer-events: none; opacity: 0.85; }
+    .btn-buy.success { background: #059669 !important; }
+    .pricing-footer { margin-top: 16px; font-size: 0.75rem; color: var(--text3); }
+
+    /* VALUE TABLE */
+    .value-table { max-width: 500px; width: 100%; margin-top: 32px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .value-header { display: flex; justify-content: space-between; padding: 12px 18px; background: rgba(220,38,38,0.05); border-bottom: 1px solid var(--border); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); }
+    .value-row { display: flex; justify-content: space-between; padding: 10px 18px; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .value-row:last-child { border-bottom: none; }
+    .value-row .name { color: var(--text2); }
+    .value-row .price { font-weight: 700; }
+    .value-row.bonus .name { color: var(--gold); }
+    .value-row.bonus .price { color: var(--gold); }
+    .value-total { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-top: 2px solid var(--red); font-weight: 800; background: rgba(220,38,38,0.03); }
+    .value-total .you-pay { background: var(--red); color: #fff; padding: 5px 14px; border-radius: 6px; font-size: 1.1rem; }
+
+    /* URGENCY */
+    .urgency-bar { max-width: 500px; width: 100%; margin-top: 20px; background: rgba(220,38,38,0.05); border: 1px solid rgba(220,38,38,0.15); border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+    .urgency-bar .icon { font-size: 1.2rem; }
+    .urgency-bar .text { font-size: 0.82rem; color: var(--text2); }
+    .urgency-bar .text strong { color: var(--red-light); }
+    .counter-bar { max-width: 500px; width: 100%; margin-top: 12px; text-align: center; font-size: 0.78rem; color: var(--text3); }
+    .counter-bar strong { color: var(--red-light); }
+
+    /* LOADING + MODAL */
+    .loading-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .loading-overlay.active { opacity: 1; pointer-events: all; }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: var(--text2); font-size: 0.85rem; }
+    .success-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1001; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .success-modal.active { opacity: 1; pointer-events: all; }
+    .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px 32px; max-width: 400px; width: 90%; text-align: center; }
+    .modal-icon { font-size: 3rem; margin-bottom: 16px; }
+    .modal-box h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+    .modal-box p { color: var(--text2); font-size: 0.88rem; margin-bottom: 24px; line-height: 1.6; }
+    .modal-btn { background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; border: none; cursor: pointer; }
+    .modal-btn:hover { background: var(--red-light); }
+
+    /* FOOTER */
+    .footer { padding: 32px 0; text-align: center; border-top: 1px solid var(--border); margin-top: 40px; }
+    .footer p { font-size: 0.75rem; color: var(--text3); }
+    .footer a { color: var(--text2); text-decoration: none; }
+    .footer a:hover { color: var(--red-light); }
+    .divider { height: 1px; background: var(--border-light); }
+
+    @media (max-width: 600px) {
+      .pain-grid, .bonus-grid { grid-template-columns: 1fr; }
+      .pricing-card { padding: 32px 20px; }
+      .nav-links .nav-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Processing your order...</div>
+  </div>
+
+  <div class="success-modal" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon">🎉</div>
+      <h3>You're In!</h3>
+      <p>Your access to the Newsletter Monetization Masterplan has been confirmed. Check your email for instant download.</p>
+      <button class="modal-btn" onclick="closeModal()">Let's Go →</button>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container">
+      <div class="logo" onclick="navigateTo('sales')"><span class="red">Newsletter</span> Masterplan</div>
+      <div class="nav-links">
+        <a class="nav-link" onclick="navigateTo('sales')">Overview</a>
+        <a class="nav-link" onclick="scrollToSection('bonuses')">Bonuses</a>
+        <button class="btn-nav" onclick="navigateTo('pricing')">Get It — $19</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== PAGE 1: SALES ==================== -->
+  <main id="page-sales">
+    <section class="hero">
+      <div class="container text-center">
+        <div class="hero-badge">⚡ Launch Pricing — Limited Spots</div>
+        <h1>Turn Your Newsletter Into a<br><span>$3K–$10K/Month Revenue Machine</span></h1>
+        <p>Even if you have <strong>less than 1,000 subscribers</strong>. The exact system — ranked by list size, with plug-and-play templates — that gets you your first dollar in <strong>7 days or less</strong>.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="navigateTo('pricing')">Get the Masterplan — $19 →</button>
+          <button class="btn-secondary" onclick="scrollToSection('product')">See What's Inside</button>
+        </div>
+        <div class="hero-proof"><span class="stars">★★★★★</span> &nbsp;Instant Digital Delivery</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center">
+          <span class="label">The Problem</span>
+          <h2>Sound Familiar?</h2>
+          <p class="section-sub">You've been writing. People are subscribing. But the bank account says otherwise.</p>
+        </div>
+        <div class="pain-grid">
+          <div class="pain-card"><div class="pain-icon">😤</div><h3>"I have subscribers but no revenue"</h3><p>Liking doesn't pay bills. You need a monetization model that actually works for your list size.</p></div>
+          <div class="pain-card"><div class="pain-icon">🤷</div><h3>"I don't know what to charge sponsors"</h3><p>Most creators guess their rates and either undercharge or get ignored. There's a formula for this.</p></div>
+          <div class="pain-card"><div class="pain-icon">😰</div><h3>"I'm not a salesperson"</h3><p>You started a newsletter to write, not to pitch — so you avoid selling and make zero dollars.</p></div>
+          <div class="pain-card"><div class="pain-icon">📉</div><h3>"My list is too small"</h3><p>Wrong. You can start at 500 subscribers. Affiliate and consulting work at 500. Paid tiers don't.</p></div>
+          <div class="pain-card pain-full"><div class="pain-icon">💸</div><h3>The real cost of doing nothing?</h3><p>An 800-person list can pull $400–$800/month from one sponsor. That's $4,800–$9,600 a year sitting on the table because you don't have a system.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center">
+          <span class="label">Here's the Truth</span>
+          <h2>You Don't Need a Bigger List.<br>You Need a Better System.</h2>
+        </div>
+        <div class="reality-box">
+          <h3>The 3 Mistakes Killing Newsletter Revenue</h3>
+          <p><strong>#1:</strong> Waiting until 10K subscribers to think about money. By then, your audience is trained to consume for free.</p>
+          <p><strong>#2:</strong> Treating your list like an audience instead of a customer base. Every subscriber is a potential buyer.</p>
+          <p><strong>#3:</strong> Scattered monetization. Trying everything at once instead of stacking revenue streams in the right order.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="product">
+      <div class="container">
+        <div class="text-center">
+          <span class="label">What's Inside</span>
+          <h2>6 Parts. 35–40 Pages. Zero Fluff.</h2>
+          <p class="section-sub">Every section is actionable. No theory. Just do X, get Y.</p>
+        </div>
+        <div class="product-list">
+          <div class="product-item"><div class="p-num">1</div><div><h3>The Foundation</h3><p>The 5 newsletter size tiers (500 → 50K subs) and what's realistic at each. The mindset shift that turns subscribers into buyers.</p></div></div>
+          <div class="product-item"><div class="p-num">2</div><div><h3>The 5 Money Models</h3><p>Affiliate, sponsors, paid tiers, your own product, and consulting — ranked by list size so you know exactly where to start.</p></div></div>
+          <div class="product-item"><div class="p-num">3</div><div><h3>The Sponsor Pitch System</h3><p>How to find sponsors at 800 subs. The exact cold email word-for-word. What to charge. Red flags and negotiation scripts.</p></div></div>
+          <div class="product-item"><div class="p-num">4</div><div><h3>Monetization Email Sequences</h3><p>5-email welcome sequence. Soft-sell structure that converts without feeling salesy. Re-engagement for cold subscribers.</p></div></div>
+          <div class="product-item"><div class="p-num">5</div><div><h3>Scaling to $3K–$10K/Month</h3><p>Content-to-cash calendar. How to stack revenue streams without burning your list. Real income benchmarks.</p></div></div>
+          <div class="product-item"><div class="p-num">6</div><div><h3>Quick-Start Checklists</h3><p>7-day sprint, sponsor outreach tracker, monthly revenue audit. Everything to execute — no guesswork.</p></div></div>
+        </div>
+        <div class="text-center" style="margin-top: 28px;"><button class="btn-primary" onclick="navigateTo('pricing')">Get Instant Access — $19 →</button></div>
+      </div>
+    </section>
+
+    <section class="section" id="bonuses">
+      <div class="container">
+        <div class="text-center">
+          <span class="label">Free Bonuses</span>
+          <h2>Plus 4 Bonuses Worth $258 — Yours Free</h2>
+          <p class="section-sub">Each one gets you from "I bought it" to "I made money" fast.</p>
+        </div>
+        <div class="bonus-grid">
+          <div class="bonus-card"><div class="bonus-tag">Bonus #1</div><h3>7-Day Monetization Sprint</h3><p>Day 1: pick your model. Day 4: send 10 sponsor emails. Day 7: your first monetization system is live.</p><div class="bonus-value"><span class="strike">$67</span> <span class="free">FREE</span></div></div>
+          <div class="bonus-card"><div class="bonus-tag">Bonus #2</div><h3>Sponsor Rate Card Calculator</h3><p>Plug in your list size, open rate, and niche — get your exact price. Never undercharge again.</p><div class="bonus-value"><span class="strike">$47</span> <span class="free">FREE</span></div></div>
+          <div class="bonus-card"><div class="bonus-tag">Bonus #3</div><h3>Email Swipe File (7 Templates)</h3><p>Plug-and-play templates — welcome, soft sell, re-engagement, follow-ups. Customize and send in 15 minutes.</p><div class="bonus-value"><span class="strike">$97</span> <span class="free">FREE</span></div></div>
+          <div class="bonus-card"><div class="bonus-tag">Bonus #4</div><h3>Revenue Stacking Matrix</h3><p>Which streams to combine at each tier. At 500 subs: do THIS. At 10K: layer THAT. Roadmap to $10K/mo.</p><div class="bonus-value"><span class="strike">$47</span> <span class="free">FREE</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center"><span class="label">The Math</span><h2>Let's Be Real About the ROI</h2></div>
+        <div class="math-box">
+          <p class="math-scenario"><strong>Scenario:</strong> 800 subscribers. Zero revenue. You follow the system.</p>
+          <div class="math-row"><span class="label">Follow the 7-Day Sprint</span><span class="value"><span class="check">✓</span> Done</span></div>
+          <div class="math-row"><span class="label">Send 20 sponsor pitches</span><span class="value"><span class="check">✓</span> Done</span></div>
+          <div class="math-row"><span class="label">Land 1 sponsor at $150/week</span><span class="value accent">$600/month</span></div>
+          <div class="math-total"><span class="label">Your investment → Monthly return</span><span class="value">$19 → $600</span></div>
+          <div class="math-note">3,057% return in month one. Costs less than a pizza. Your first sponsorship check covers it 31x over.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="text-center"><span class="label">Before You Decide</span><h2>"But What If…"</h2></div>
+        <div class="objection-list">
+          <div class="objection"><div class="objection-q" onclick="toggleObjection(this)">"My list is too small"<span class="arrow">▾</span></div><div class="objection-a">The system works from 500 subscribers. Affiliate and consulting start at 500. Part 2 ranks all 5 models by list size so you know exactly where to start.</div></div>
+          <div class="objection"><div class="objection-q" onclick="toggleObjection(this)">"I tried monetizing before and it flopped"<span class="arrow">▾</span></div><div class="objection-a">Wrong model for your size, or no system — just guessing. This gives you templates, scripts, and a rate card calculator. Zero guesswork.</div></div>
+          <div class="objection"><div class="objection-q" onclick="toggleObjection(this)">"I'm not a salesperson"<span class="arrow">▾</span></div><div class="objection-a">Good. Part 4 gives you "soft sell" email sequences that convert without feeling pushy. Word-for-word templates. Fill in your details and send.</div></div>
+          <div class="objection"><div class="objection-q" onclick="toggleObjection(this)">"Can't I figure this out for free?"<span class="arrow">▾</span></div><div class="objection-a">Sure. And you could build a house watching renovation shows. This is a complete, ordered system with templates and calculators. The time saved alone is worth $19.</div></div>
+          <div class="objection"><div class="objection-q" onclick="toggleObjection(this)">"What if it doesn't work for my niche?"<span class="arrow">▾</span></div><div class="objection-a">Frameworks are niche-agnostic. B2B, finance, wellness, tech — we show you how to adapt each model to your audience.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <div class="container">
+        <h2>Are You Done Leaving<br>Money on the Table?</h2>
+        <p>Full guide + 4 bonuses. Everything you need. Nothing you don't.</p>
+        <button class="btn-primary" onclick="navigateTo('pricing')">Yes — Give Me the Masterplan →</button>
+        <div class="cta-sub">Instant digital delivery. Starts working in 7 days.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== PAGE 2: PRICING ==================== -->
+  <div class="divider" id="pricing-divider"></div>
+
+  <section class="page-pricing" id="page-pricing" style="display: none;">
+    <div class="container text-center" style="margin-bottom: 32px;">
+      <span class="label">Your Investment</span>
+      <h2>Everything. One Price. No Upsells.</h2>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-popular">Launch Price — 97% Off</div>
+      <div class="pricing-name">Newsletter Monetization Masterplan</div>
+      <div class="pricing-desc">Complete system + 4 bonuses — instant delivery</div>
+      <div><span class="pricing-original">$605</span><span class="pricing-current">$19</span></div>
+      <div class="pricing-period">One-time payment. Lifetime access. Free updates forever.</div>
+
+      <ul class="pricing-features">
+        <li><span class="check">✓</span>Full 35–40 Page Monetization Guide (6 Parts)</li>
+        <li><span class="check">✓</span>5 Money Models Ranked by List Size (500 → 50K)</li>
+        <li><span class="check">✓</span>Sponsor Pitch System + Cold Email Scripts</li>
+        <li><span class="check">✓</span>Monetization Email Sequences (Welcome, Soft Sell, Re-Engagement)</li>
+        <li><span class="check">✓</span>Scaling Blueprint + Content-to-Cash Calendar</li>
+        <li><span class="check">✓</span>7-Day Sprint + Sponsor Tracker + Revenue Audit</li>
+        <li><span class="check bonus-check">+</span><strong>Bonus:</strong>&nbsp;7-Day Monetization Sprint <span class="text3" style="font-size: 0.75rem;">($67)</span></li>
+        <li><span class="check bonus-check">+</span><strong>Bonus:</strong>&nbsp;Sponsor Rate Card Calculator <span class="text3" style="font-size: 0.75rem;">($47)</span></li>
+        <li><span class="check bonus-check">+</span><strong>Bonus:</strong>&nbsp;Email Swipe File (7 Templates) <span class="text3" style="font-size: 0.75rem;">($97)</span></li>
+        <li><span class="check bonus-check">+</span><strong>Bonus:</strong>&nbsp;Revenue Stacking Matrix <span class="text3" style="font-size: 0.75rem;">($47)</span></li>
+      </ul>
+
+      <button class="btn-buy" id="buyBtn" onclick="handlePurchase()">🔒 Get Instant Access — $19</button>
+      <div class="pricing-footer">🔒 Secure checkout &nbsp;·&nbsp; ⚡ Instant Delivery</div>
+    </div>
+
+    <div class="value-table">
+      <div class="value-header"><span>What's Included</span><span>Value</span></div>
+      <div class="value-row"><span class="name">Newsletter Monetization Masterplan (Guide)</span><span class="price">$197</span></div>
+      <div class="value-row"><span class="name">Sponsor Pitch System + Scripts</span><span class="price">$97</span></div>
+      <div class="value-row"><span class="name">Monetization Email Sequences</span><span class="price">$97</span></div>
+      <div class="value-row"><span class="name">Scaling Blueprint ($3K–$10K/mo)</span><span class="price">$147</span></div>
+      <div class="value-row"><span class="name">Quick-Start Checklists & Templates</span><span class="price">$67</span></div>
+      <div class="value-row bonus"><span class="name">🎁 7-Day Monetization Sprint</span><span class="price">$67</span></div>
+      <div class="value-row bonus"><span class="name">🎁 Sponsor Rate Card Calculator</span><span class="price">$47</span></div>
+      <div class="value-row bonus"><span class="name">🎁 Email Swipe File (7 Templates)</span><span class="price">$97</span></div>
+      <div class="value-row bonus"><span class="name">🎁 Revenue Stacking Matrix</span><span class="price">$47</span></div>
+      <div class="value-total"><span>Total Value</span><span class="you-pay">$19</span></div>
+    </div>
+
+    <div class="urgency-bar"><span class="icon">⏰</span><span class="text"><strong>Launch Pricing:</strong> $19 jumps to $47 after <span id="spotsLeft">200</span> buyers. The 4 bonuses expire in <span id="bonusTimer">14 days</span>.</span></div>
+    <div class="counter-bar"><span id="buyCount">147</span> copies sold at launch pricing &nbsp;·&nbsp; <strong><span id="remaining">53</span> spots remaining</strong></div>
+
+    <div style="margin-top: 28px;"><button class="btn-secondary" onclick="navigateTo('sales')">← Back to Overview</button></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Newsletter Monetization Masterplan. All rights reserved.</p>
+      <p style="margin-top: 6px;"><a href="/cdn-cgi/l/email-protection#a4d7d1d4d4cbd6d0e4c1dcc5c9d4c8c18ac7cbc9">Contact</a> &nbsp;·&nbsp; <a href="#" onclick="event.preventDefault()">Privacy</a> &nbsp;·&nbsp; <a href="#" onclick="event.preventDefault()">Terms</a></p>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function navigateTo(page) {
+      const sales = document.getElementById('page-sales');
+      const pricing = document.getElementById('page-pricing');
+      const divider = document.getElementById('pricing-divider');
+      if (page === 'pricing') {
+        sales.style.display = 'none';
+        pricing.style.display = 'flex';
+        divider.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else {
+        pricing.style.display = 'none';
+        sales.style.display = 'block';
+        divider.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+    }
+
+    function scrollToSection(id) {
+      const sales = document.getElementById('page-sales');
+      if (sales.style.display === 'none') navigateTo('sales');
+      setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    }
+
+    function toggleObjection(el) {
+      const parent = el.parentElement;
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.objection').forEach(o => o.classList.remove('open'));
+      if (!isOpen) parent.classList.add('open');
+    }
+
+    // Counters
+    (function() {
+      const spotsEl = document.getElementById('spotsLeft');
+      const buyCountEl = document.getElementById('buyCount');
+      const remainingEl = document.getElementById('remaining');
+      const bonusTimerEl = document.getElementById('bonusTimer');
+
+      function updateTimer() {
+        const now = new Date();
+        let d = localStorage.getItem('nmm_dl');
+        let deadline = d && new Date(d) > now ? new Date(d) : (() => { const e = new Date(); e.setDate(e.getDate() + 14); e.setHours(23, 59, 59, 0); localStorage.setItem('nmm_dl', e.toISOString()); return e; })();
+        const diff = deadline - now;
+        const days = Math.floor(diff / 864e5);
+        const hrs = Math.floor((diff % 864e5) / 36e5);
+        if (bonusTimerEl) bonusTimerEl.textContent = days + 'd ' + hrs + 'h';
+      }
+      updateTimer(); setInterval(updateTimer, 60000);
+
+      let buyers = parseInt(localStorage.getItem('nmm_buyers') || '147');
+      const total = 200;
+      function upd() {
+        if (buyCountEl) buyCountEl.textContent = buyers;
+        if (spotsEl) spotsEl.textContent = total - buyers;
+        if (remainingEl) remainingEl.textContent = total - buyers;
+      }
+      upd();
+      (function loop() {
+        if (Math.random() < 0.3 && buyers < total) { buyers++; localStorage.setItem('nmm_buyers', buyers); upd(); }
+        setTimeout(loop, 30000 + Math.random() * 60000);
+      })();
+    })();
+
+    async function handlePurchase() {
+      const btn = document.getElementById('buyBtn');
+      const overlay = document.getElementById('loadingOverlay');
+      const text = document.getElementById('loadingText');
+      btn.classList.add('loading'); btn.textContent = 'Processing...';
+      overlay.classList.add('active'); text.textContent = 'Processing your order...';
+      try {
+        await new Promise(r => setTimeout(r, 1500 + Math.random() * 800));
+        text.textContent = 'Payment successful!';
+        btn.classList.remove('loading'); btn.classList.add('success'); btn.textContent = '✓ Order Confirmed';
+        setTimeout(() => { overlay.classList.remove('active'); document.getElementById('successModal').classList.add('active'); }, 600);
+      } catch(e) {
+        text.textContent = 'Something went wrong. Try again.';
+        btn.classList.remove('loading'); btn.textContent = '🔒 Get Instant Access — $19';
+        setTimeout(() => overlay.classList.remove('active'), 1200);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+      window.open('https://suby.fi', '_blank');
+    }
+  </script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ff1a064cdd04e87',t:'MTc3OTM0NjAxMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
